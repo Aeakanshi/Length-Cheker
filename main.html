@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+     <link rel="preconnect" href="https://fonts.gstatic.com">
+      <link href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600&display=swap" rel="stylesheet"> 
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Text Length</title>
+
+  </head>
+  <style type="text/css">
+    body {
+    font-family: 'Arimo', sans-serif;
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    background: #fdfcf8;
+  }
+  #outerwrapper {
+    width: 100%;
+    position: relative;
+  }
+    #header {
+  display: flex;
+  width:100%;
+  padding: 27px 0 28px 0;
+  background: #74bbca;
+}
+    .innerwrapper {
+    border: 3px solid #f1f1f1;
+    width: 50%;
+    margin: 9em auto;
+    padding: 2em 0 5em 0;
+    box-shadow: 0px 0px 9px #c5c5c561;
+}
+
+h1 {
+  text-transform: capitalize;
+  color: #095b6d;
+}
+
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 11px 0 30px 0;
+  display: inline-block;
+  border: 1px solid #74bbca;
+  box-sizing: border-box;
+}
+
+button {
+  border: 1px solid #adaaaa;
+    /* border: 1px solid; */
+    color: #030303;
+    background: #f1f1f1;
+    padding: 10px 20px;
+    margin: 2em 0 0 0;
+    /* border: none; */
+    cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+.text-container {
+  width: 60%;
+  margin: 0 auto;
+  text-align: center;
+}
+.bx1{
+    background: #74bbca;
+    border-radius: 4px;
+    border: 1px solid;
+    display: inline-block;
+    padding: 4px 8px;
+    color: white;
+    margin-bottom: 6px;
+}
+  </style>
+  
+  <body>
+    <div id="outerwrapper" class="login-page fetch_results" > 
+      <div id="header"></div>
+
+      <div class="innerwrapper">
+        <div class="text-container" >
+          <h1>Text Length checker</h1>
+          <input type="text" id="text" placeholder="Enter Your Text" name="uname">
+          <div id="result">
+            <div><span class="bx2">Words</span> <span class="bx1" id="count">0</span></div>
+            <div><span class="bx2">Space:</span> <span class="bx1" id="spaceCount">0</span></div>
+            <!-- Newline: <span id="lineCount">0</span><br/> -->
+            <div><span class="bx2">Total word without space:</span> <span class="bx1" id="test">0</span></div>
+          </div>
+          <button class="login-btn" type="reset" onClick="resetAllValues();">Reset</button>
+        </div>
+    </div> 
+	</div>
+
+  <script type="text/javascript">
+    counter = function() {
+    var value = $('#text').val();
+
+    if (value.length == 0) {
+        $('#count').html(0);
+        $('#spaceCount').html(0);
+        $('#test').html(0);
+        return;
+    }
+
+
+    var regex = /\s+/gi;
+    var count = value.length;
+    var spaceCount = value.split(" ").length -1;
+    // var lineCount = value.split('\n').length - 1 ;
+    var test = value.replace(regex, '').length;
+    var length = 1000;
+  $("#text").removeAttr("maxlength");
+     if(test >= length){
+     var total = spaceCount + length + lineCount;
+         $("#text").attr('maxlength',total);
+     }
+    
+     $('#count').html(count);
+     $('#spaceCount').html(spaceCount);
+     $('#test').html(test);
+};
+
+function resetAllValues() {
+    $('.fetch_results').find('input:text','.bx1').val('');
+}
+
+$(document).ready(function() {
+    $('#count').click(counter);
+    $('#text').change(counter);
+    $('#text').keydown(counter);
+    $('#text').keypress(counter);
+    $('#text').keyup(counter);
+    $('#text').blur(counter);
+    $('#text').focus(counter);
+
+    $('.fetch_results').find('input:text','#count').val(''); 
+});
+
+
+  </script>
+  </body>
+</html>
